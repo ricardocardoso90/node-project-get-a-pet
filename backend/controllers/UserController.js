@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 module.exports = class UserController {
@@ -42,12 +43,31 @@ module.exports = class UserController {
 
     const userExists = await User.findOne({ email: email });
     if (userExists) {
-      res.status(422).json({ message: "Email já cadastrado por outro usuário, tente outro email!!" });
+      res.status(422).json({ message: "Email já cadastrado por outro usuário!!" });
       return;
     };
 
-    await new User({ name, email, password, confirmpassword, image, phone }).save();
+    //CRIAÇÃO DA SENHA.
+    const salt = await bcrypt.genSalt(12);
+    const passwordHash = await bcrypt.hash(password, salt);
 
-    res.status(200).json({ message: "Dados cadastrados com sucesso!!" });
+    //CRIAÇÃO DO USUÁRIO.
+    try {
+      await new User({
+        name,
+        email,
+        password: passwordHash,
+        confirmpassword,
+        image,
+        phone
+      })
+        .save();
+      res.status(200).json({
+        message: "Dados cadastrados com sucesso!!"
+      });
+    } catch (error) {
+      res.status(500).json({ message: error });
+    };
+
   };
 };
