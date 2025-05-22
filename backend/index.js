@@ -16,9 +16,7 @@ app.use(express.static('public'));
 const UserRoutes = require('./routes/UserRoutes');
 app.use('/users', UserRoutes);
 
-app.get('/', (req, res) => {
-  res.send("Olá mundão!!");
-  // res.json({ message: "Deu tudo certo, Ricardo!!" });
-});
+const PetsRoutes = require('./routes/PetRoutes');
+app.use('/pets', PetsRoutes);
 
 app.listen(5000, () => console.log("Servidor rodando com sucesso!!"));
