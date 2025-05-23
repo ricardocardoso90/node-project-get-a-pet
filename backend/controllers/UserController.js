@@ -9,27 +9,63 @@ module.exports = class UserController {
     const { name, email, password, confirmpassword, image, phone } = req.body;
 
     //VALIDANDO USUÁRIOS.
-    if (!name) { res.status(422).json({ message: "O nome é obrigatório!!" }); return; };
-    if (!email) { res.status(422).json({ message: "O email é obrigatório!!" }); return; };
+    if (!name) {
+      res.status(422).json({ message: "O nome é obrigatório!!" });
+      return;
+    };
 
-    if (!password) { res.status(422).json({ message: "A senha é obrigatório!!" }); return; };
-    if (!confirmpassword) { res.status(422).json({ message: "A confirmação de senha é obrigatório!!" }); return; };
+    if (!email) {
+      res.status(422).json({ message: "O email é obrigatório!!" });
+      return;
+    };
 
-    if (!image) { res.status(422).json({ message: "A imagem é obrigatório!!" }); return; };
-    if (!phone) { res.status(422).json({ message: "O Telefone é obrigatório!!" }); return; };
+    if (!password) {
+      res.status(422).json({ message: "A senha é obrigatório!!" });
+      return;
+    };
 
-    if (password !== confirmpassword) { res.status(422).json({ message: "As senhas não são iguais!!" }); return; };
+    if (!confirmpassword) {
+      res.status(422).json({ message: "A confirmação de senha é obrigatório!!" });
+      return;
+    };
+
+    if (!image) {
+      res.status(422).json({ message: "A imagem é obrigatório!!" });
+      return;
+    };
+
+    if (!phone) {
+      res.status(422).json({ message: "O Telefone é obrigatório!!" });
+      return;
+    };
+
+    if (password !== confirmpassword) {
+      res.status(422).json({ message: "As senhas não são iguais!!" });
+      return;
+    };
 
     //VERIFICAÇÃO SE O EMAIL JÁ FOI CADASTRADO.
     const userExists = await User.findOne({ email: email });
-    if (userExists) { res.status(422).json({ message: "Email já cadastrado por outro usuário!!" }); return; };
+    if (userExists) {
+      res.status(422).json(
+        { message: "Email já cadastrado por outro usuário!!" });
+      return;
+    };
 
     //CRIAÇÃO DA SENHA.
     const salt = await bcrypt.genSalt(12);
     const passwordHash = await bcrypt.hash(password, salt);
 
     //CRIAÇÃO DO USUÁRIO.
-    const user = new User({ name, email, password: passwordHash, confirmpassword, image, phone });
+    const user = new User({
+      name,
+      mail,
+      password: passwordHash,
+      confirmpassword,
+      image,
+      phone
+    });
+
     try {
 
       const newUser = await user.save();
@@ -46,17 +82,43 @@ module.exports = class UserController {
     const { email, password } = req.body;
 
     //VALIDANDO USUÁRIOS.
-    if (!email) { res.status(422).json({ message: "O email é obrigatório!!" }); return; };
-    if (!password) { res.status(422).json({ message: "A senha é obrigatório!!" }); return; };
+    if (!email) {
+      res.status(422).json({ message: "O email é obrigatório!!" });
+      return;
+    };
+
+    if (!password) {
+      res.status(422).json({ message: "A senha é obrigatório!!" });
+      return;
+    };
 
     //VERIFICAÇÃO SE O EMAIL JÁ FOI CADASTRADO.
     const user = await User.findOne({ email: email });
-    if (!user) { res.status(422).json({ message: "Não há usuário cadastrado com esse e-mail!!" }); return; };
+    if (!user) {
+      res.status(422).json({ message: "Não há usuário cadastrado com esse e-mail!!" });
+      return;
+    };
 
     //VERIFICAÇÃO SE AS SENHAS SÃO IGUAIS AS JÁ CADASTRADAS.
     const checkPassword = await bcrypt.compare(password, user.password);
-    if (!checkPassword) { res.status(422).json({ message: "As senhas não são iguais!!" }); return; };
+    if (!checkPassword) {
+      res.status(422).json({ message: "As senhas não são iguais!!" });
+      return;
+    };
 
     await createUserToken(user, req, res);
+  };
+
+  static async checkUser(req, res) {
+    let currentUser;
+    console.log(req.headers.authorization);
+
+    if (req.headers.authorization) {
+
+    } else {
+      currentUser = null;
+    }
+
+    res.status(200).send(currentUser);
   };
 };
