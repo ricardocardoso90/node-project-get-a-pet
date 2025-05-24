@@ -114,6 +114,8 @@ module.exports = class UserController {
   static async checkUser(req, res) {
     let currentUser;
 
+    console.log(req.headers.authorization);
+
     if (req.headers.authorization) {
       const token = getToken(req);
       const decoded = jwt.verify(token, 'nossosecret');
@@ -133,10 +135,17 @@ module.exports = class UserController {
     const user = await User.findById(id).select('-password');
 
     if (!user) {
-      res.status(422).json({ message: "Usuário não encontrado!!" });
+      res.status(422).json({
+        message: "Usuário não encontrado!!"
+      });
       return;
     };
 
-    res.status(200).json(user);
+    res.status(200).json({ user });
+  };
+
+  static async editUser(req, res) {
+    res.status(200).json({ message: "Usuário atualizado com sucesso!!" });
+    return;
   };
 };

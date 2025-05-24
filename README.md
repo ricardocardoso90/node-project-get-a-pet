@@ -3,6 +3,13 @@
 **Tecnologias utilizadas:**
 
 - [Express]()
+- [Bcrypt]()
+- [Cors]()
+- [Multer]()
+- [MongoDB]()
+- [Mongoose]()
+- [Cookie Parser]()
+- [Jsonwebtoken]()
 
 ## Instalação:
 
