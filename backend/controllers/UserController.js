@@ -145,7 +145,60 @@ module.exports = class UserController {
   };
 
   static async editUser(req, res) {
-    res.status(200).json({ message: "Usuário atualizado com sucesso!!" });
-    return;
+    const id = req.params.id;
+
+    const user = await User.findById(id);
+
+    const { name, email, phone, password, confirmpassword } = req.body;
+
+    let image = '';
+
+    //VALIDANDO USUÁRIOS.
+    if (!name) {
+      res.status(422).json({ message: "O nome é obrigatório!!" });
+      return;
+    };
+
+    if (!email) {
+      res.status(422).json({ message: "O email é obrigatório!!" });
+      return;
+    };
+
+    //CHECAR SE O EMAIL JÁ FOI CADASTRADO POR ALGUM USUÁRIO.
+    const userExists = await User.findOne({ email: email });
+
+    if (user.email !== email && userExists) {
+      res.status(422).json({
+        message: "Usuário não encontrado!!"
+      });
+      return;
+    };
+
+    user.email = email;
+
+    if (!password) {
+      res.status(422).json({ message: "A senha é obrigatório!!" });
+      return;
+    };
+
+    if (!confirmpassword) {
+      res.status(422).json({ message: "A confirmação de senha é obrigatório!!" });
+      return;
+    };
+
+    if (!image) {
+      res.status(422).json({ message: "A imagem é obrigatório!!" });
+      return;
+    };
+
+    if (!phone) {
+      res.status(422).json({ message: "O Telefone é obrigatório!!" });
+      return;
+    };
+
+    if (password !== confirmpassword) {
+      res.status(422).json({ message: "As senhas não são iguais!!" });
+      return;
+    };
   };
 };
