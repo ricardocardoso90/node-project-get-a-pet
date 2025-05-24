@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const createUserToken = require('../helpers/create-user-token');
 const getToken = require('../helpers/get-token');
+const getUserByToken = require('../helpers/get-user-by-token');
 
 module.exports = class UserController {
   static async register(req, res) {
@@ -111,6 +112,7 @@ module.exports = class UserController {
     await createUserToken(user, req, res);
   };
 
+  //CHECANDO USUÁRIO.
   static async checkUser(req, res) {
     let currentUser;
 
@@ -144,10 +146,11 @@ module.exports = class UserController {
     res.status(200).json({ user });
   };
 
+  //EDITAR USUÁRIOS.
   static async editUser(req, res) {
-    const id = req.params.id;
 
-    const user = await User.findById(id);
+    const token = getToken(req);
+    const user = await getUserByToken(token);
 
     const { name, email, phone, password, confirmpassword } = req.body;
 
@@ -169,7 +172,7 @@ module.exports = class UserController {
 
     if (user.email !== email && userExists) {
       res.status(422).json({
-        message: "Usuário não encontrado!!"
+        message: "Por favor, utilize outro E-mail!!"
       });
       return;
     };
