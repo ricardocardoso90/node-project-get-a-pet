@@ -119,11 +119,25 @@ module.exports = class UserController {
 
     user.email = email;
 
-    if (!password) { res.status(422).json({ message: "A senha é obrigatório!!" }); return; };
-    if (!confirmpassword) { res.status(422).json({ message: "A confirmação de senha é obrigatório!!" }); return; };
+    if (password !== confirmpassword) {
+      res.status(422).json({ message: "As senhas não são iguais!!" });
+      return;
+    } else if (password === confirmpassword && password !== null) {
+      
+      //CRIAÇÃO DA SENHA.
+      const salt = await bcrypt.genSalt(12);
+      const passwordHash = await bcrypt.hash(password, salt);
+
+      user.password === passwordHash;
+    };
+
+    // if (!password) { res.status(422).json({ message: "A senha é obrigatório!!" }); return; };
+    // if (!confirmpassword) { res.status(422).json({ message: "A confirmação de senha é obrigatório!!" }); return; };
 
     if (!image) { res.status(422).json({ message: "A imagem é obrigatório!!" }); return; };
     if (!phone) { res.status(422).json({ message: "O Telefone é obrigatório!!" }); return; };
+
+    user.phone = phone;
 
     if (password !== confirmpassword) { res.status(422).json({ message: "As senhas não são iguais!!" }); return; };
   };
