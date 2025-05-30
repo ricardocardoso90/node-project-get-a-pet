@@ -10,7 +10,7 @@ module.exports = class UserController {
   static async register(req, res) {
 
     //BUSCANDO DADOS DO BODY.
-    const { name, email, password, confirmpassword, image, phone } = req.body;
+    const { name, email, password, confirmpassword, phone } = req.body;
 
     //VALIDANDO USUÁRIOS.
     if (!name) { res.status(422).json({ message: "O nome é obrigatório!!" }); return; };
@@ -19,7 +19,7 @@ module.exports = class UserController {
     if (!password) { res.status(422).json({ message: "A senha é obrigatório!!" }); return; };
     if (!confirmpassword) { res.status(422).json({ message: "A confirmação de senha é obrigatório!!" }); return; };
 
-    if (!image) { res.status(422).json({ message: "A imagem é obrigatório!!" }); return; };
+    // if (!image) { res.status(422).json({ message: "A imagem é obrigatório!!" }); return; };
     if (!phone) { res.status(422).json({ message: "O Telefone é obrigatório!!" }); return; };
 
     if (password !== confirmpassword) { res.status(422).json({ message: "As senhas não são iguais!!" }); return; };
@@ -33,7 +33,7 @@ module.exports = class UserController {
     const passwordHash = await bcrypt.hash(password, salt);
 
     //CRIAÇÃO DO USUÁRIO.
-    const user = new User({ name, email, password: passwordHash, confirmpassword, image, phone });
+    const user = new User({ name, email, password: passwordHash, confirmpassword, phone });
 
     try {
       const newUser = await user.save();
@@ -107,7 +107,7 @@ module.exports = class UserController {
 
     const { name, email, phone, password, confirmpassword } = req.body;
 
-    let image = '';
+    if (req.file) { user.image = req.file.filename; };
 
     //VALIDANDO USUÁRIOS.
     if (!name) { res.status(422).json({ message: "O nome é obrigatório!!" }); return; };
