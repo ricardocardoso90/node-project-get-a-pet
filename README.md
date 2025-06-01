@@ -33,8 +33,6 @@ Este projeto é uma aplicação backend desenvolvida com Node.js, Express e Mong
 
    ```bash
    npm install
-   # ou
-   yarn install
    ```
 
 ## Executando o Projeto
@@ -43,6 +41,4 @@ Este projeto é uma aplicação backend desenvolvida com Node.js, Express e Mong
 
    ```bash
    npm run dev
-   # ou
-   yarn run dev
    ```
