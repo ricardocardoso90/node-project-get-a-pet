@@ -13,6 +13,5 @@ module.exports = class PetController {
     await data.save();
 
     res.json({ message: "Dados cadastrados com sucesso!!" });
-    res.json({ message: "Dados cadastrados com sucesso!!" });
   };
 };
