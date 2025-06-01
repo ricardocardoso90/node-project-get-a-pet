@@ -1,22 +1,48 @@
-## Projeto: Get A Pet
+# Node Project - Get a Pet
 
-**Tecnologias utilizadas:**
+Este projeto é uma aplicação backend desenvolvida com Node.js, Express e MongoDB, focada em gerenciamento de usuários e autenticação para um sistema chamado "Get a Pet".
 
-- [Express]()
-- [Bcrypt]()
-- [Cors]()
-- [Multer]()
-- [MongoDB]()
-- [Mongoose]()
-- [Cookie Parser]()
-- [Jsonwebtoken]()
+---
 
-## Instalação:
+## Tecnologias Utilizadas
 
-- `npm init`
-- `npm i ou npm install`
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- Cors
+- Cookie Parser
+- Bcrypt (para hashing de senhas)
+- Jsonwebtoken (para autenticação JWT)
+- Multer (para upload de arquivos)
 
-## Para rodar:
+---
 
-- `npm start`
-- `npm run dev`
+## Funcionalidades
+
+- Cadastro e login de usuários com autenticação segura via JWT
+- Upload de arquivos (provavelmente para fotos de perfil ou animais)
+- Integração com banco de dados MongoDB para armazenamento de dados
+- Proteção de rotas e gerenciamento de sessões via cookies
+
+---
+
+## Instalação
+
+1. Instale as dependências:
+
+   ```bash
+   npm install
+   # ou
+   yarn install
+   ```
+
+## Executando o Projeto
+
+1. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   npm run dev
+   # ou
+   yarn run dev
+   ```
