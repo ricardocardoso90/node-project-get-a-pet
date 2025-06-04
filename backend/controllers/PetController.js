@@ -28,7 +28,13 @@ module.exports = class PetController {
 
     //CRIAÇÃO E SALVAMENTO DE PETS.
     const data = new Pet({
-      name, age, weight, color, available, images: [], user: {
+      name,
+      age,
+      weight,
+      color,
+      available,
+      images: [],
+      user: {
         _id: user._id,
         name: user.name,
         image: user.image,
