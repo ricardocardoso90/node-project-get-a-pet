@@ -68,8 +68,6 @@ module.exports = class UserController {
   static async checkUser(req, res) {
     let currentUser;
 
-    console.log(req.headers.authorization);
-
     if (req.headers.authorization) {
       const token = getToken(req);
       const decoded = jwt.verify(token, 'nossosecret');
@@ -99,7 +97,7 @@ module.exports = class UserController {
     res.status(200).json({ user });
   };
 
-  //EDITANDO USUÁRIOS.
+  // EDITANDO USUÁRIOS.
   static async editUser(req, res) {
 
     const token = getToken(req);
@@ -107,26 +105,41 @@ module.exports = class UserController {
 
     const { name, email, phone, password, confirmpassword } = req.body;
 
-    if (req.file) { user.image = req.file.filename; };
+    let image = ''
+    if (req.file) { image = req.file.filename; };
 
     //VALIDANDO USUÁRIOS.
     if (!name) { res.status(422).json({ message: "O nome é obrigatório!!" }); return; };
+    user.name = name;
+
     if (!email) { res.status(422).json({ message: "O email é obrigatório!!" }); return; };
 
-    //CHECAR SE O EMAIL JÁ FOI CADASTRADO POR ALGUM USUÁRIO.
+    // //CHECAR SE O EMAIL JÁ FOI CADASTRADO POR ALGUM USUÁRIO.
     const userExists = await User.findOne({ email: email });
     if (user.email !== email && userExists) { res.status(422).json({ message: "Por favor, utilize outro E-mail!!" }); return; };
 
     user.email = email;
 
-    if (password !== confirmpassword) {
+    if (image) {
+      const imageName = req.file.filename;
+      user.image = imageName;
+    };
+
+    if (!image) { res.status(422).json({ message: "A imagem é obrigatório!!" }); return; };
+    if (!phone) { res.status(422).json({ message: "O Telefone é obrigatório!!" }); return; };
+
+    user.phone = phone;
+
+
+    if (password != confirmpassword) {
       res.status(422).json({ message: "As senhas não são iguais!!" });
-      return;
-    } else if (password === confirmpassword && password !== null) {
+    } else if (password == confirmpassword && password != null) {
 
       //CRIAÇÃO DA SENHA.
       const salt = await bcrypt.genSalt(12);
-      const passwordHash = await bcrypt.hash(password, salt);
+      const reqPassword = req.body.password;
+
+      const passwordHash = await bcrypt.hash(reqPassword, salt);
 
       user.password === passwordHash;
     };
@@ -144,12 +157,5 @@ module.exports = class UserController {
       res.status(500).json({ message: error });
       return;
     };
-
-    if (!image) { res.status(422).json({ message: "A imagem é obrigatório!!" }); return; };
-    if (!phone) { res.status(422).json({ message: "O Telefone é obrigatório!!" }); return; };
-
-    user.phone = phone;
-
-    if (password !== confirmpassword) { res.status(422).json({ message: "As senhas não são iguais!!" }); return; };
   };
 };

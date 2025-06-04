@@ -8,10 +8,10 @@ module.exports = class PetController {
 
     const name = req.body.name;
     const age = req.body.age;
+    const description = req.body.description;
     const weight = req.body.weight;
     const color = req.body.color;
     const images = req.files;
-
     const available = true;
 
     //VALIDAÇÕES.
@@ -27,12 +27,12 @@ module.exports = class PetController {
     const user = await getUserByToken(token);
 
     //CRIAÇÃO E SALVAMENTO DE PETS.
-    const data = new Pet({
-      name,
-      age,
-      weight,
-      color,
-      available,
+    const pet = new Pet({
+      name: name,
+      age: age,
+      weight: weight,
+      color: color,
+      available: available,
       images: [],
       user: {
         _id: user._id,
@@ -47,8 +47,8 @@ module.exports = class PetController {
     });
 
     try {
-      const newPet = await data.save();
-      res.status(201).json({ message: "Pet cadastrado com sucesso!!", newPet });
+      const newPet = await pet.save();
+      res.status(201).json({ message: "Pet cadastrado com sucesso!!", newPet: newPet });
     } catch (error) {
       res.status(500).json({ message: error });
     };

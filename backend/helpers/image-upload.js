@@ -1,31 +1,33 @@
-const path = require('path');
-const multer = require('multer');
+const multer = require("multer");
+const path = require("path");
 
+// Destination to store image
 const imageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     let folder = "";
 
+    console.log(req)
+
     if (req.baseUrl.includes('users')) {
-      folder = "users"
+      folder = "users";
     } else if (req.baseUrl.includes('pets')) {
-      folder = "pets"
-    };
-
-    cb(null, `public/images/${folder}`);
+      folder = "pets";
+    }
+    cb(null, `public/images/${folder}/`);
   },
-
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + String(Math.floor(Math.random() * 10)) + path.extname(file.originalname));
-  }
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
 });
 
 const imageUpload = multer({
   storage: imageStorage,
-  fileFilter(req, filter, cb) {
+  fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(png|jpg)$/)) {
-      return cb(new Error("Por favor, envie apenas JPG ou PNG!!"));
-    };
-    cb(undefined, true)
+      // upload only png and jpg format
+      return cb(new Error("Por favor, envie apenas png ou jpg!"));
+    }
+    cb(undefined, true);
   },
 });
 
