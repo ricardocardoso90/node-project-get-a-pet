@@ -13,10 +13,10 @@ app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(express.static('public'));
 
 // ROTAS
-const UserRoutes = require('./routes/UserRoutes');
-app.use('/users', UserRoutes);
-
 const PetsRoutes = require('./routes/PetRoutes');
+const UserRoutes = require('./routes/UserRoutes');
+
 app.use('/pets', PetsRoutes);
+app.use('/users', UserRoutes);
 
 app.listen(5000, () => console.log("Servidor rodando com sucesso!!"));
