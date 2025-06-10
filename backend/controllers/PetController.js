@@ -4,6 +4,12 @@ const getToken = require('../helpers/get-token');
 const getUserByToken = require('../helpers/get-user-by-token');
 
 module.exports = class PetController {
+
+  static async getAll(req, res) {
+    const pets = await Pet.find().sort('-createdAt');
+    res.status(200).json({ pets: pets });
+  };
+
   static async create(req, res) {
 
     const { name, age, description, weight, color } = req.body;
@@ -22,7 +28,7 @@ module.exports = class PetController {
 
     if (!weight) { res.status(422).json({ message: "O peso é obrigatório!!" }); return; }
     if (!color) { res.status(422).json({ message: "A cor é obrigatória!!" }); return; }
-    if (!images) { res.status(422).json({ message: "A imagem é obrigatória!!" }); return; }
+    if (images.length === 0) { res.status(422).json({ message: "A imagem é obrigatória!!" }); return; }
 
     //USUÁRIO DONO DO PET.
     const token = getToken(req);
