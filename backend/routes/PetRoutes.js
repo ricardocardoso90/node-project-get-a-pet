@@ -7,6 +7,7 @@ const PetController = require('../controllers/PetController');
 router.get('/', PetController.getAll);
 router.get('/mypets', verifyToken, PetController.getAllUserPets);
 router.get('/myadoptions', verifyToken, PetController.myUserAdoptions);
+router.get('/:id', PetController.getPetById);
 
 router.post('/create', verifyToken, imageUpload.array('images'), PetController.create);
 
