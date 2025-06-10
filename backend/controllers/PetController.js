@@ -31,11 +31,31 @@ module.exports = class PetController {
   static async getPetById(req, res) {
     const id = req.params.id;
 
+    //CHEGAR SE ID É VÁLIDO.
     if (!ObjectId.isValid(id)) { res.status(422).json({ message: "ID Inválido!!" }); return; };
+
+    //CHECAR SE PET EXISTE.
     const pet = await Pet.findOne({ _id: id });
 
     if (!pet) { res.status(404).json({ message: "Pet não encontrado!!" }) };
     res.status(200).json({ pet: pet });
+  };
+
+  static async removePetById(req, res) {
+    const id = req.params.id;
+
+    //CHEGAR SE ID É VÁLIDO.
+    if (!ObjectId.isValid(id)) { res.status(422).json({ message: "ID Inválido!!" }); return; };
+
+    //CHECAR SE PET EXISTE.
+    const pet = await Pet.findOne({ _id: id });
+
+    if (!pet) { res.status(404).json({ message: "Pet não encontrado!!" }) };
+
+    //CHECAR SE USUÁRIO LOGADO REGISTROU O PET.
+    const token = getToken(req);
+    const user = await getUserByToken(token);
+
   };
 
   static async create(req, res) {

@@ -9,6 +9,7 @@ router.get('/mypets', verifyToken, PetController.getAllUserPets);
 router.get('/myadoptions', verifyToken, PetController.myUserAdoptions);
 router.get('/:id', PetController.getPetById);
 
+router.delete('/:id', verifyToken, PetController.removePetById);
 router.post('/create', verifyToken, imageUpload.array('images'), PetController.create);
 
 module.exports = router;
