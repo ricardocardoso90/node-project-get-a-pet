@@ -45,7 +45,10 @@ module.exports = class PetController {
     const id = req.params.id;
 
     //CHEGAR SE ID É VÁLIDO.
-    if (!ObjectId.isValid(id)) { res.status(422).json({ message: "ID Inválido!!" }); return; };
+    if (!ObjectId.isValid(id)) {
+      res.status(422).json({ message: "ID Inválido!!" });
+      return;
+    };
 
     //CHECAR SE PET EXISTE.
     const pet = await Pet.findOne({ _id: id });
@@ -55,6 +58,13 @@ module.exports = class PetController {
     //CHECAR SE USUÁRIO LOGADO REGISTROU O PET.
     const token = getToken(req);
     const user = await getUserByToken(token);
+
+    if (pet.user._id.toString() !== user._id.toString()) {
+      res.status(422).json({ message: "Houve um problema em processar a sua solicitação, tente novamente mais tarde!!" })
+    };
+
+    await Pet.findByIdAndDelete(id);
+    res.status(200).json({ message: "Pet removido com sucesso!!" });
 
   };
 
