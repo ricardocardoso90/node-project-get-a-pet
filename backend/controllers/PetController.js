@@ -19,8 +19,15 @@ module.exports = class PetController {
     res.status(200).json({ pets: pets });
   };
 
-  static async create(req, res) {
+  static async myUserAdoptions(req, res) {
+    const token = getToken(req);
+    const user = await getUserByToken(token);
 
+    const pets = await Pet.find({ 'adopter._id': user._id }).sort('-createdAt');
+    res.status(200).json({ pets: pets });
+  };
+
+  static async create(req, res) {
     const { name, age, description, weight, color } = req.body;
     const images = req.files;
     const available = true;
