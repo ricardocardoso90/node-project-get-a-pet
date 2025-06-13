@@ -5,7 +5,6 @@ const getUserByToken = require('../helpers/get-user-by-token');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports = class PetController {
-
   static async getAll(req, res) {
     const pets = await Pet.find().sort('-createdAt');
     res.status(200).json({ pets: pets });
@@ -72,12 +71,6 @@ module.exports = class PetController {
     const { name, age, description, weight, color } = req.body;
     const images = req.files;
     const available = true;
-
-    // const name = req.body.name;
-    // const age = req.body.age;
-    // const description = req.body.description;
-    // const weight = req.body.weight;
-    // const color = req.body.color;
 
     //VALIDAÇÕES.
     if (!name) { res.status(422).json({ message: "O nome é obrigatório!!" }); return; }
