@@ -119,7 +119,7 @@ module.exports = class PetController {
     const { name, age, description, weight, color, available } = req.body;
     const images = req.files;
 
-    const updatedData = {};
+    const updatedData = {}
 
     //CHECAR SE PET EXISTE.
     const pet = await Pet.findOne({ _id: id });
