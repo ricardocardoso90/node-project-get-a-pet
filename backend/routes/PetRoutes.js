@@ -12,4 +12,6 @@ router.get('/:id', PetController.getPetById);
 router.delete('/:id', verifyToken, PetController.removePetById);
 router.post('/create', verifyToken, imageUpload.array('images'), PetController.create);
 
+router.patch('/:id', verifyToken, imageUpload.array('images'), PetController.updatePet);
+
 module.exports = router;
