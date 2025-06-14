@@ -136,11 +136,11 @@ module.exports = class PetController {
     };
 
     //VALIDAÇÕES.
-    if (!name) { res.status(422).json({ message: "O nome é obrigatório!!" }); return; } else { updatedData.name = name }
-    if (!age) { res.status(422).json({ message: "A idade é obrigatória!!" }); return; } else { updatedData.age = age }
+    if (!name) { res.status(422).json({ message: "O nome é obrigatório!!" }); return; } else { updatedData.name = name };
+    if (!age) { res.status(422).json({ message: "A idade é obrigatória!!" }); return; } else { updatedData.age = age };
 
-    if (!weight) { res.status(422).json({ message: "O peso é obrigatório!!" }); return; } else { updatedData.weight = weight }
-    if (!color) { res.status(422).json({ message: "A cor é obrigatória!!" }); return; } else { updatedData.color = color }
+    if (!weight) { res.status(422).json({ message: "O peso é obrigatório!!" }); return; } else { updatedData.weight = weight };
+    if (!color) { res.status(422).json({ message: "A cor é obrigatória!!" }); return; } else { updatedData.color = color };
 
     if (images.length === 0) {
       res.status(422).json({
