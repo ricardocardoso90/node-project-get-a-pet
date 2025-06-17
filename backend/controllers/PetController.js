@@ -173,5 +173,23 @@ module.exports = class PetController {
       res.status(422).json({ message: "Você não pode agendar uma visita com seu próprio PET!!" });
       return;
     };
+
+    //CHECAR SE USUÁRIO JÁ REGISTROU UMA VISITA.
+    if (pet.adopter) {
+      if (pet.adopter._id.equals(user._id)) {
+        res.status(422).json({ message: "Você já agendou uma visita para esse PET!!" });
+        return;
+      };
+    };
+
+    //ADICIONAR USUÁRIO COMO ADOTANTE DO PET.
+    pet.adopter = {
+      _id: user._id,
+      name: user.name,
+      image: user.image,
+    };
+
+    await Pet.findByIdAndUpdate(id, pet);
+    res.status(200).json({ message: `A visita foi agendada com sucesso, entre em contato com ${pet.user.name} pelo telefone ${pet.user.phone}` });
   };
 };
