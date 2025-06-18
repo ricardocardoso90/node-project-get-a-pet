@@ -207,13 +207,14 @@ module.exports = class PetController {
     const user = await getUserByToken(token);
 
     if (pet.user._id.toString() !== user._id.toString()) {
-      res.status(422).json({ message: "Houve um problema em processar a sua solicitação, tente novamente mais tarde!!" });
+      res.status(422).json({
+        message: "Houve um problema em processar a sua solicitação, tente novamente mais tarde!!"
+      });
       return;
     };
 
     pet.available = false;
     await Pet.findByIdAndUpdate(id, pet);
-
     res.status(200).json({ message: "Parabéns!! O ciclo de adoção foi finalizado com sucesso!!" });
   };
 };
