@@ -1,18 +1,26 @@
-import { Input } from "../../components/input";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-
 import styles from "../../styles/form.module.css";
 
+import { Input } from "../../components/input";
+
 export function Register() {
+  const [user, setUser] = useState({});
+
   function handleChange(e) {
-    console.log(e.target.value);
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(user);
   };
 
   return (
     <section className={styles['form-container']}>
       <h1>Registrar</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
           text="Nome"
           type="text"
@@ -33,7 +41,7 @@ export function Register() {
           text="E-mail"
           type="email"
           name="email"
-          placeholder="Digite o seu E-mail"
+          placeholder="Digite o seu e-mail"
           handleOnChange={handleChange}
         />
 
@@ -41,15 +49,15 @@ export function Register() {
           text="Senha"
           type="password"
           name="password"
-          placeholder="Digite a sua Senha"
+          placeholder="Digite a sua senha"
           handleOnChange={handleChange}
         />
 
         <Input
-          text="Confirmação de Senha"
+          text="Confirmação de senha"
           type="password"
           name="confirmpassword"
-          placeholder="Confirme a sua Senha"
+          placeholder="Confirme a sua senha"
           handleOnChange={handleChange}
         />
 
