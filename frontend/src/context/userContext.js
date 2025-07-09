@@ -7,7 +7,7 @@ export function UserProvider({ children }) {
   const { register } = useAuth();
 
   return (
-    <Context.Provider value={{register}}>
+    <Context.Provider value={{ register }}>
       {children}
     </Context.Provider>
   );
