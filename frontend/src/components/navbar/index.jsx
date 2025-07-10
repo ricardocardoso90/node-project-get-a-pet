@@ -3,7 +3,12 @@ import styles from "./styles.module.css";
 
 import Logo from "../../assets/img/logo.png";
 
+import { useContext } from "react";
+import { Context } from "../../context/userContext";
+
 export function Navbar() {
+  const { authenticated, logout } = useContext(Context);
+
   return (
     <nav className={styles.navbar}>
       <div className={styles['navbar-logo']}>
@@ -13,9 +18,18 @@ export function Navbar() {
 
       <ul>
         <li><Link to="/">Adotar</Link></li>
-        <li><Link to="/login">Entrar</Link></li>
-        <li><Link to="/register">Cadastrar</Link></li>
-      </ul>
-    </nav>
+        {authenticated
+          ? (
+            <li onClick={logout}>Sair</li>
+          )
+          : (
+            <>
+              <li><Link to="/login">Entrar</Link></li>
+              <li><Link to="/register">Cadastrar</Link></li>
+            </>
+          )
+        }
+      </ul >
+    </nav >
   );
 };
