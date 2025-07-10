@@ -1,9 +1,8 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
 import Logo from "../../assets/img/logo.png";
-
-import { useContext } from "react";
 import { Context } from "../../context/userContext";
 
 export function Navbar() {
@@ -18,17 +17,15 @@ export function Navbar() {
 
       <ul>
         <li><Link to="/">Adotar</Link></li>
+
         {authenticated
-          ? (
-            <li onClick={logout}>Sair</li>
-          )
-          : (
-            <>
-              <li><Link to="/login">Entrar</Link></li>
-              <li><Link to="/register">Cadastrar</Link></li>
-            </>
-          )
-        }
+          ? <li onClick={logout}>Sair</li>
+          :
+          <>
+            <li><Link to="/login">Entrar</Link></li>
+            <li><Link to="/register">Cadastrar</Link></li>
+          </>
+        };
       </ul >
     </nav >
   );
