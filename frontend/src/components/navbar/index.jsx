@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+
 import styles from "./styles.module.css";
 
 import Logo from "../../assets/img/logo.png";
@@ -19,7 +20,10 @@ export function Navbar() {
         <li><Link to="/">Adotar</Link></li>
 
         {authenticated
-          ? <li onClick={logout}>Sair</li>
+          ?
+          <>
+            <li onClick={logout}>Sair</li>
+          </>
           :
           <>
             <li><Link to="/login">Entrar</Link></li>
