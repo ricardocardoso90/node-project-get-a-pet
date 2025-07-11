@@ -1,4 +1,5 @@
 import api from "../utils/api";
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,8 +14,11 @@ export default function useAuth() {
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    if (token) { api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}` };
-    setAuthenticated(true);
+    if (token) {
+      api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+      setAuthenticated(true);
+    };
+
   }, []);
 
   //REGISTRAR NOVOS USUÁRIOS.
