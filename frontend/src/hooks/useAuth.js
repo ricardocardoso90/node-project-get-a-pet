@@ -21,6 +21,26 @@ export default function useAuth() {
 
   }, []);
 
+  //LOGAR USUÁRIO.
+  async function login(user) {
+    let msgText = "Login realizado com sucesso!!";
+    let msgType = "sucess";
+
+    try {
+      const response = await api.post('/users/login', user);
+      const data = response.data;
+
+      await authUser(data);
+      console.log(`Usuário logado com sucesso: ${data}`);
+
+    } catch (error) {
+      msgText = error.response.data.message;
+      msgType = "error";
+    };
+
+    setFlashMessage(msgText, msgType);
+  };
+
   //REGISTRAR NOVOS USUÁRIOS.
   async function register(user) {
     let msgText = "Cadastro realizado com sucesso!";
@@ -32,6 +52,7 @@ export default function useAuth() {
 
       await authUser(data);
       console.log(`Usuário registrado com sucesso: ${data}`);
+    
     } catch (error) {
       msgText = error.response.data.message;
       msgType = "error";
@@ -61,5 +82,5 @@ export default function useAuth() {
     setFlashMessage(msgText, msgType);
   };
 
-  return { register, authenticated, logout };
+  return { login, register, authenticated, logout };
 };
