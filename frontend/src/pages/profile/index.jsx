@@ -95,7 +95,7 @@ export function Profile() {
             }
             alt={user.name}
           />
-        )};
+        )}
       </div>
 
       <form
