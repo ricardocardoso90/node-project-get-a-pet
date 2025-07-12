@@ -6,6 +6,7 @@ import stylesGlobals from "../../styles/form.module.css";
 import useFlashMessage from "../../hooks/useFlashMessage";
 
 import { Input } from "../../components/input";
+import { ImageProfile } from "../../components/imageProfile";
 
 export function Profile() {
   const [user, setUser] = useState({});
@@ -73,6 +74,7 @@ export function Profile() {
         },
       })
         .then((response) => {
+          console.log(response.data);
           setUser(response.data);
         });
 
@@ -87,7 +89,7 @@ export function Profile() {
         <h1>Perfil</h1>
 
         {(user.image || preview) && (
-          <img
+          <ImageProfile
             src={
               preview
                 ? URL.createObjectURL(preview)
