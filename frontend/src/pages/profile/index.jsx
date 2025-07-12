@@ -1,23 +1,83 @@
+import api from "../../utils/api";
 import styles from "./styles.module.css";
+import { useEffect, useState } from "react";
+
 import stylesGlobals from "../../styles/form.module.css";
+import useFlashMessage from "../../hooks/useFlashMessage";
 
 import { Input } from "../../components/input";
-import { useEffect, useState } from "react";
 
 export function Profile() {
   const [user, setUser] = useState({});
+  const [token] = useState(localStorage.getItem('token') || '');
+
+  const { setFlashMessage } = useFlashMessage();
 
   function handleFileChange(e) {
-
+    setUser({ ...user, [e.target.name]: e.target.files[0] });
   };
 
   function handleChange(e) {
-
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let msgType = "sucess";
 
-  }, []);
+    const formData = new FormData();
+    await Object.keys(user).forEach((key) => {
+      formData.append(key, user[key]);
+    });
+
+    const data = await api.patch(`/users/edit/${user._id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        msgType = "error"
+        return error.response.data;
+      });
+
+    setFlashMessage(data.message, msgType);
+  };
+
+  // async function getUser() {
+  //   try {
+  //     const response = await api.get("/users/checkuser", {
+  //       headers: {
+  //         Authorization: `Bearer ${JSON.parse(token)}`
+  //       },
+  //     });
+
+  //     const data = response.data;
+  //     setUser(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   };
+  // };
+
+  useEffect(() => {
+    // getUser();
+    try {
+      api.get("/users/checkuser", {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`
+        },
+      })
+        .then((response) => {
+          setUser(response.data);
+        });
+
+    } catch (error) {
+      console.log(error);
+    };
+  }, [token]);
 
   return (
     <section >
@@ -26,7 +86,10 @@ export function Profile() {
         <p>Preview Imagem</p>
       </div>
 
-      <form className={stylesGlobals["form-container"]}>
+      <form
+        onSubmit={handleSubmit}
+        className={stylesGlobals["form-container"]}
+      >
         <Input
           text="Imagem"
           type="file"
