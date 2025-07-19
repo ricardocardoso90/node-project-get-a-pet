@@ -1,4 +1,5 @@
 import styles from "./styles.module.css";
+import { PetForm } from "../../components/petForm";
 
 export function AddPets() {
   return (
@@ -8,7 +9,7 @@ export function AddPets() {
         <p>Depois ele ficará disponível para adoção.</p>
       </div>
 
-      <p>Formulário</p>
+      <PetForm btnText="Cadastrar Pet" />
     </section>
   );
 };
