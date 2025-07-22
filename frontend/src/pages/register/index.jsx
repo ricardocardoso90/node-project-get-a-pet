@@ -4,7 +4,7 @@ import styles from "../../styles/form.module.css";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/userContext";
 
-import { Input } from "../../components/input";
+import { Input } from "../../components/Input";
 
 export function Register() {
   const [user, setUser] = useState({});

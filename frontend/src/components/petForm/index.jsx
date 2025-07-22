@@ -2,8 +2,8 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import stylesGlobals from "../../styles/form.module.css";
 
-import { Input } from "../input/index";
-import { Select } from "../select";
+import { Input } from "../Input/index";
+import { Select } from "../Select";
 
 export function PetForm({ petData, btnText, handleSubmit }) {
   const [preview, setPreview] = useState([]);

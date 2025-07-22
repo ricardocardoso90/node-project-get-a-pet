@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 
 import styles from "../../styles/form.module.css";
 
-import { Input } from "../../components/input";
+import { Input } from "../../components/Input";
 import { Context } from "../../context/userContext";
 
 export function Login() {

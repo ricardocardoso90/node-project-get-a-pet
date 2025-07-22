@@ -1,9 +1,9 @@
 import { Routes } from "./routes";
 import styles from "./App.module.css";
 
-import { Navbar } from "./components/navbar";
-import { Message } from "./components/message";
-import { Footer } from "./components/footer";
+import { Navbar } from "./components/Navbar";
+import { Message } from "./components/Message";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (

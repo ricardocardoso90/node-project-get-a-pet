@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
 
 
-import { PetForm } from "../../components/petForm";
+import { PetForm } from "../../components/PetForm";
 import useFlashMessage from "../../hooks/useFlashMessage";
 
 export function AddPets() {

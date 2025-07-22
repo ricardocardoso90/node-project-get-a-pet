@@ -1,16 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Home } from "../pages/home";
-import { Login } from "../pages/login";
-import { Register } from "../pages/register";
-import { Profile } from "../pages/profile";
-import { MyPets } from "../pages/myPets";
-import { AddPets } from "../pages/addPets";
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login";
+import { Register } from "../pages/Register";
+import { Profile } from "../pages/Profile";
+import { MyPets } from "../pages/MyPets";
+import { AddPets } from "../pages/AddPets";
 
 export function AuthRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/pets/mypets" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/user/profile" element={<Profile />} />

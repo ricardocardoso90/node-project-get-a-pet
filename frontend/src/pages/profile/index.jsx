@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import stylesGlobals from "../../styles/form.module.css";
 import useFlashMessage from "../../hooks/useFlashMessage";
 
-import { Input } from "../../components/input";
-import { ImageProfile } from "../../components/imageProfile";
+import { Input } from "../../components/Input";
+import { ImageProfile } from "../../components/ImageProfile";
 
 export function Profile() {
   const [user, setUser] = useState({});
