@@ -26,8 +26,7 @@ export function PetForm({ petData, btnText, handleSubmit }) {
 
   function submit(e) {
     e.preventDefault();
-    // handleSubmit(pet);
-    console.log(pet);
+    handleSubmit(pet);
   };
 
   return (
