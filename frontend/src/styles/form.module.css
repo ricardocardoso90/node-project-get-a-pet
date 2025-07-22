@@ -30,3 +30,16 @@
   color: #16479D;
   font-weight: bold;
 }
+
+.preview-pet-images {
+  margin: 1em;
+
+  display: flex;
+  justify-content: center;
+
+  & img {
+    width: 100px;
+    height: 100px;
+    margin: 0 1em;
+  }
+}
