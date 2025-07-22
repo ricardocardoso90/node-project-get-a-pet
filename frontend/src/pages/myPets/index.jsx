@@ -26,6 +26,28 @@ export function MyPets() {
       })
   }, [token]);
 
+  async function removePet(id) {
+    let msgType = "sucess";
+
+    const data = await api.delete(`/pets/${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      },
+    })
+      .then((response) => {
+        const updatedPets = pets.filter((pet) => pet._id !== id);
+        setPets(updatedPets);
+
+        return response.data;
+      })
+      .catch((error) => {
+        msgType = "error";
+        return error.resonse.data;
+      });
+
+    setFlashMessage(data.message, msgType);
+  };
+
   return (
     <section>
       <div className={styleGlobals["petlist-header"]}>
@@ -51,7 +73,7 @@ export function MyPets() {
                         <button className={styleGlobals["conclude-btn"]}>Concluir adoção</button>
                       )}
                       <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
-                      <button>Excluir</button>
+                      <button onClick={() => removePet(pet._id)}>Excluir</button>
                     </>
                   )
                   : (<p>Pet já adotado</p>)}
