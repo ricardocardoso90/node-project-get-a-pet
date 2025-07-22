@@ -1,7 +1,7 @@
 import api from "../../utils/api";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import styles from "./styles.module.css";
+import styles from "./styles.module.css";
 
 import useFlashMessage from "../../hooks/useFlashMessage";
 import styleGlobals from "../../styles/dashboard.module.css";
@@ -28,39 +28,37 @@ export function MyPets() {
 
   return (
     <section>
-      <div>
+      <div className={styleGlobals["petlist-header"]}>
         <h1>Meus Pets</h1>
         <Link to="/pet/add">Cadastrar Pet</Link>
       </div>
 
-      <div>
+      <div className={styleGlobals["petlist-container"]}>
         {pets.length > 0 &&
           pets.map((pet) => (
-            <div key={pet._id}>
+            <div className={styleGlobals["petlist-row"]} key={pet._id}>
               <ImageProfile
-                width="75px"
+                width="px75"
                 alt={pet.name}
                 src={`${process.env.REACT_APP_API}/images/pets/${pet.images[0]}`}
               />
               <span className="bold">{pet.name}</span>
-              <div className={styleGlobals.action}>
-                {
-                  pet.available
-                    ? (
-                      <>
-                        {pet.adopter && (
-                          <button>Concluir adoção</button>
-                        )}
-                        <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
-                        <button>Excluir</button>
-                      </>
-                    )
-                    : (<p>Pet já adotado</p>)
-                }
+              <div className={styleGlobals.actions}>
+                {pet.available
+                  ? (
+                    <>
+                      {pet.adopter && (
+                        <button className={styleGlobals["conclude-btn"]}>Concluir adoção</button>
+                      )}
+                      <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
+                      <button>Excluir</button>
+                    </>
+                  )
+                  : (<p>Pet já adotado</p>)}
               </div>
             </div>
           ))
-        };
+        }
         {pets.length === 0 && <p>Não há pets cadastrados</p>}
       </div>
     </section>

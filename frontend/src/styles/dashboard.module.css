@@ -1,0 +1,88 @@
+.petlist-header {
+  margin-bottom: 2em;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & h1 {
+    margin-bottom: 0;
+  }
+
+  & a {
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #16479D;
+    cursor: pointer;
+    transition: .5s;
+    padding: .5em .8em;
+    border-radius: 5px;
+    border: 2px solid #16479D;
+  }
+
+  & a:hover {
+    color: #16479D;
+    background-color: transparent;
+  }
+}
+
+.petlist-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.petlist-row {
+  margin: 1em;
+  padding: 1em;
+  width: 100%;
+  border-bottom: 1px solid #16479D;
+
+  display: flex;
+  align-items: center;
+
+  & img {
+    margin-right: 1em;
+  }
+
+  & span {
+    min-width: 100px;
+  }
+}
+
+.actions {
+  margin-left: auto;
+}
+
+.actions {
+  & a,
+  button {
+    color: #16479D;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #FFF;
+    cursor: pointer;
+    transition: .5s;
+    padding: 7px 12px;
+    border-radius: 5px;
+    border: 2px solid #16479D;
+    font-size: 12px;
+    margin-left: 1em;
+  }
+
+  & a:hover,
+  button:hover {
+    color: #FFF;
+    background-color: #16479D;
+  }
+
+  & conclude-btn {
+    color: #25B456;
+    border-color: #25B456;
+
+    &:hover {
+      color: #FFF;
+      background-color: #25B456;
+    }
+  }
+}
