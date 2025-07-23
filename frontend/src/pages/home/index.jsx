@@ -1,5 +1,9 @@
+import styles from "./styles.module.css";
+
 export function Home() {
   return (
-    <h1>Página HOME!</h1>
+    <section>
+      <h1>Página HOME!</h1>
+    </section>
   );
 };

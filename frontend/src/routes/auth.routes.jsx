@@ -12,7 +12,7 @@ export function AuthRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/pets/mypets" element={<Home />} />
+      {/* <Route path="/pets/mypets" element={<Home />} /> */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/user/profile" element={<Profile />} />
