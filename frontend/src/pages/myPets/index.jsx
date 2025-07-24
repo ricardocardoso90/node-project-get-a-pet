@@ -22,7 +22,6 @@ export function MyPets() {
     })
       .then((response) => {
         setPets(response.data.pets);
-        console.log(response.data.pets)
       })
   }, [token]);
 
