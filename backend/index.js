@@ -11,7 +11,9 @@ app.use(express.json());
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 // PASTA PUBLIC DAS IMAGENS.
-app.use(express.static('public'));
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // ROTAS
 const PetsRoutes = require('./routes/PetRoutes');

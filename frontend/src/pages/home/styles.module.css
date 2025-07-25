@@ -1,0 +1,64 @@
+.pet-home-header {
+  margin-bottom: 2em;
+
+  & h1 {
+    margin-bottom: .3em;
+  }
+}
+
+.pet-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  & .pet-card {
+    width: 22%;
+    margin: 1.5%;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    & .pet-card-image img {
+      width: 100%;
+      height: 225px;
+      margin-bottom: 1.2em;
+      background-size: cover;
+      background-position: center;
+    }
+
+    & h3 {
+      padding: 8px;
+      color: #16479D;
+      font-size: 1.6em;
+      margin-bottom: 1em;
+    }
+
+    & p {
+      margin-bottom: 1em;
+    }
+
+    & a {
+      color: #16479D;
+      font-weight: bold;
+      text-decoration: none;
+      background-color: #FFD400;
+      cursor: pointer;
+      transition: .5s;
+      padding: 15px;
+      border-radius: 5px;
+      font-size: 1.1em;
+
+      &:hover {
+        color: #FFF;
+        background-color: #E7C30D;
+      }
+    }
+
+    .adopted-text {
+      padding: 15px;
+      color: #25B456;
+      font-weight: bold;
+    }
+  }
+}

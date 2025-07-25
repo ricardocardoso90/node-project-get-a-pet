@@ -1,7 +1,7 @@
 import api from "../../utils/api";
 import styles from "./styles.module.css";
 
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export function Home() {
@@ -16,22 +16,24 @@ export function Home() {
 
   return (
     <section>
-      <div>
+      <div className={styles['pet-home-header']}>
         <h1>Adote um pet</h1>
         <p>Veja os detalhes de cada um, e conheça o tutor deles.</p>
       </div>
 
-      <div>
+      <div className={styles['pet-container']}>
         {pets.length > 0 && (
           pets.map((pet) => (
-            <div key={pet._id}>
-              <p>{pet.image}</p>
+            <div key={pet._id} className={styles['pet-card']}>
+              <div className={styles['pet-card-image']}>
+                <img src={`${process.env.REACT_APP_API}/images/pets/${pet.images[0]}`} alt={pet.name} />
+              </div>
               <h3>{pet.name}</h3>
               <p><span className="bold">Peso:</span> {pet.weight}kg</p>
 
               {pet.available
                 ? (<Link to={`pet/${pet._id}`}>Mais detalhes</Link>)
-                : (<p>Adotado</p>)
+                : (<p className={styles['adopted-text']}>Adotado</p>)
               }
             </div>
           ))
