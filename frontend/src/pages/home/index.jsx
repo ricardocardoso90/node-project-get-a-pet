@@ -25,15 +25,20 @@ export function Home() {
         {pets.length > 0 && (
           pets.map((pet) => (
             <div key={pet._id} className={styles['pet-card']}>
-              <div className={styles['pet-card-image']}>
-                <img src={`${process.env.REACT_APP_API}/images/pets/${pet.images[0]}`} alt={pet.name} />
-              </div>
+              <img src={
+                `${process.env.REACT_APP_API}/images/pets/${pet.images[0]}`}
+                alt={pet.name}
+              />
               <h3>{pet.name}</h3>
               <p><span className="bold">Peso:</span> {pet.weight}kg</p>
 
               {pet.available
-                ? (<Link to={`pet/${pet._id}`}>Mais detalhes</Link>)
-                : (<p className={styles['adopted-text']}>Adotado</p>)
+                ? (
+                  <Link to={`pet/${pet._id}`}>Mais detalhes</Link>
+                )
+                : (
+                  <p className={styles['adopted-text']}>Adotado</p>
+                )
               }
             </div>
           ))
