@@ -79,7 +79,7 @@ export function MyPets() {
               </div>
             </div>
           ))
-        }
+        };
         {pets.length === 0 && <p>Não há pets cadastrados</p>}
       </div>
     </section>

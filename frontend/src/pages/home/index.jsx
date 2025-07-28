@@ -33,12 +33,8 @@ export function Home() {
               <p><span className="bold">Peso:</span> {pet.weight}kg</p>
 
               {pet.available
-                ? (
-                  <Link to={`pet/${pet._id}`}>Mais detalhes</Link>
-                )
-                : (
-                  <p className={styles['adopted-text']}>Adotado</p>
-                )
+                ? (<Link to={`pet/${pet._id}`}>Mais detalhes</Link>)
+                : (<p className={styles['adopted-text']}>Adotado</p>)
               }
             </div>
           ))
