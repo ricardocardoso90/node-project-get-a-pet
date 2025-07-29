@@ -8,6 +8,7 @@ import { MyPets } from "../pages/MyPets";
 import { AddPets } from "../pages/AddPets";
 import { EditPets } from "../pages/EditPets";
 import { PetDetails } from "../pages/PetDetails";
+import { MyAdoptions } from "../pages/MyAdoptions";
 
 export function AuthRoutes() {
   return (
@@ -21,6 +22,7 @@ export function AuthRoutes() {
       <Route path="/pet/add" element={<AddPets />} />
       <Route path="/pet/edit/:id" element={<EditPets />} />
       <Route path="/pet/:id" element={<PetDetails />} />
+      <Route path="/pet/myadoptions" element={<MyAdoptions />} />
     </Routes>
   );
 };

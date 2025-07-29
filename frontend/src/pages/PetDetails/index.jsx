@@ -8,7 +8,8 @@ import useFlashMessage from "../../hooks/useFlashMessage";
 
 export function PetDetails() {
   const [pet, setPet] = useState({});
-  const [token] = useState(localStorage.getItem('token') || '');
+  const token = localStorage.getItem('token') || '';
+  // const [token] = useState(localStorage.getItem('token') || '');
 
   const { id } = useParams();
   const { setFlashMessage } = useFlashMessage();
