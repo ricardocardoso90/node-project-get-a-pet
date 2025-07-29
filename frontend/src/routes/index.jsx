@@ -1,17 +1,13 @@
-
-import { useState } from "react";
+import { useContext } from "react";
+import { Context } from "../context/userContext";
 
 import { AppRoutes } from "./app.routes";
 import { AuthRoutes } from "./auth.routes";
 
 export function Routes() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  function isLoadedRoutes() {
-    setIsLoaded(!isLoaded);
-  };
+  const { authenticated } = useContext(Context);
 
   return (
-    isLoaded ? < AppRoutes /> : < AuthRoutes />
+    authenticated ? < AppRoutes /> : < AuthRoutes />
   );
 };
