@@ -1,7 +1,7 @@
 import api from "../../utils/api";
+import { useState, useEffect } from "react";
 import stylesGlobals from "../../styles/dashboard.module.css";
 
-import { useState, useEffect } from "react";
 import { ImageProfile } from "../../components/ImageProfile";
 
 export function MyAdoptions() {
@@ -51,7 +51,7 @@ export function MyAdoptions() {
               </div>
             </div>
           ))
-        )};
+        )}
 
         {pets.length === 0 && <p>Ainda não há adoções de Pets</p>}
       </div>
